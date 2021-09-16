@@ -1,0 +1,8 @@
+<div class="container terms" [dir]="appService.lang" *ngIf="content">
+  <div class="row my-5">
+    <div class="text-center mt-5">  <h4>{{content.title}}</h4>
+    </div>
+    <div class="col-md-12  text-left" [innerHTML]="decode(content.content) ">
+    </div>
+  </div>
+</div>

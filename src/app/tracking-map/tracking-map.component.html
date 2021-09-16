@@ -1,0 +1,26 @@
+<div class="places" >
+  <div class="map">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8">
+      <agm-marker
+        [latitude]="+from?.lat"
+        [longitude]="+from?.lng"
+      ></agm-marker>
+      <agm-marker
+        [latitude]="+place?.latitude"
+        [longitude]="+place?.longitude"
+        [iconUrl] ="
+  {
+    url: appService.fileUrl + data.subCategoryObj.categoryObj.icon,
+    scaledSize: {
+        width: 40,
+        height: 30
+    }
+}"
+      ></agm-marker>
+      <agm-marker
+        [latitude]="+to?.lat"
+        [longitude]="+to?.lng"
+      ></agm-marker>
+    </agm-map>
+  </div>
+</div>

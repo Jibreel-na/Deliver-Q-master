@@ -1,0 +1,263 @@
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+
+@include media-breakpoint-between(lg, xl) {
+  .logo, .logo-black {
+    width: 10.5rem !important;
+  }
+
+  .nav-link {
+    font-size: 14px !important;
+  }
+
+  .lang-icon {
+    font-size: 12px !important;
+  }
+
+}
+
+
+@include media-breakpoint-between(md, lg) {
+  ::ng-deep .stepper .mat-horizontal-stepper-header-container {
+    padding: 0 50px !important;
+  }
+
+}
+
+@include media-breakpoint-between(sm, md) {
+
+  header {
+
+    li {
+      margin: 0 0.3rem !important;
+    }
+
+    .logo, .logo-black {
+      width: 7.3rem !important;
+    }
+
+
+    .nav-link {
+      font-size: 12px !important;
+      padding: 0.5rem 8px !important;
+    }
+
+    .lang-icon {
+      font-size: 12px !important;
+    }
+  }
+
+
+}
+
+@include media-breakpoint-between(xs, sm) {
+  .auth-form {
+    width: 100% !important;
+    .info-side , .login {
+      h4 , h5 {
+        font-size: 15px !important;
+
+      }
+
+      button{
+        font-size: 13px !important;
+
+      }
+    }
+  }
+
+
+  .user-info-form {
+    mat-form-field {
+      width: 100% !important;
+    }
+  }
+
+
+  .vision {
+    .section {
+      width: 100% !important;
+    }
+  }
+
+  footer {
+    text-align: center !important;
+
+    ul {
+      list-style: none !important;
+    }
+
+    .contact {
+      text-align: center !important;
+    }
+  }
+
+  .advantage {
+    text-align: center !important;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .home .about-bg {
+    text-align: center !important;
+
+    p {
+      padding: 10px !important;
+    }
+  }
+
+  .tracking {
+    position: unset !important;
+    text-align: center !important;
+    background: $secondary !important;
+    padding: 1rem 0px !important;
+
+    button {
+      margin: 10px;
+    }
+
+    .form {
+      width: 90% !important;
+      margin: auto !important;
+
+      input {
+        width: 100% !important;
+      }
+    }
+  }
+
+
+  header {
+    .logo, .logo-black {
+      width: 8.5rem !important;
+    }
+
+    .contact div {
+      justify-content: center !important;
+    }
+
+    .list {
+      flex-direction: column !important;
+
+      ul {
+        text-align: center !important;
+
+        li {
+          margin: auto !important;;
+        }
+
+        .lang-account {
+          img {
+            margin: auto 10px !important;
+          }
+        }
+      }
+    }
+  }
+
+
+  .is-mobile {
+    display: block !important;
+  }
+
+  .is-desk {
+    display: none !important;
+  }
+
+  .featured {
+    background-size: contain !important;
+  }
+
+  .new-shipment {
+    .location {
+      img {
+        height: 2rem !important;
+      }
+
+      span {
+        font-size: 13px !important;
+      }
+    }
+  }
+
+  .stepper .icon img {
+    width: 4rem !important;
+  }
+
+  .mat-expansion-panel-header {
+    padding: 0 14px !important;
+  }
+
+  .stepper .mat-content {
+    font-size: 15px !important;
+  }
+
+  .stepper mat-panel-title {
+    img {
+      width: 2.5rem !important;
+    }
+
+    span {
+      font-size: 15px !important;
+      margin: auto 0.5rem !important;
+    }
+  }
+
+  .mat-expansion-panel-header-description {
+    font-size: 13px !important;
+  }
+
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    margin-right: 6px !important;;
+  }
+
+  .map agm-map {
+    width: 15rem !important;
+  }
+
+  .subscribe {
+    text-align: center !important;
+
+    .d-flex {
+      justify-content: center;
+    }
+  }
+
+  .my-shipments {
+    .w-25 {
+      width: 50% !important;
+    }
+
+    .w-75 {
+      width: 100% !important;
+    }
+
+    .action {
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .account-list {
+    display: flex;
+    overflow-x: auto;
+
+    .item {
+      margin: 0 5px;
+    }
+  }
+
+  .address-item {
+    padding: 20px 10px !important;
+  }
+
+  .ship-info {
+    padding: 20px 0 !important;
+  }
+}
+
+

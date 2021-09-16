@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 text-center py-3 bg-success">
+      <p>{{'_ShipmentStatus' | translate}} </p>
+      <img src="assets/images/tracking/status.svg" class="w-3" alt="">
+      <p class="mt-2" *ngIf="status == 0">{{'_Pending' | translate}}</p>
+      <p class="mt-2" *ngIf="status == 1">{{'_Dispatched' | translate}}</p>
+      <p class="mt-2" *ngIf="status == 2">{{'_OnWay' | translate}}</p>
+      <p class="mt-2" *ngIf="status == 3">{{'_Completed' | translate}}</p>
+      <p class="mt-2" *ngIf="status == 4">{{'_Canceled' | translate}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-m-12 py-5">
+          <div class="w-100 action loader p-1" *ngIf="isplaceholder">
+            <ngx-shimmer-loading class="place-content" [shape]="'square'"
+                                 [width]="'100%'"></ngx-shimmer-loading>
+          </div>
+
+          <div class="d-flex" *ngIf="data">
+            <div class="position-relative">
+              <img src="assets/images/tracking/pickup.svg" class="w-100" alt="">
+              <img src="assets/images/tracking/check.png" class=" position-absolute check" alt="" *ngIf=" status >=1">
+              <p class="text-center">{{'_Dispatched' | translate}}</p>
+            </div>
+            <div>
+              <img src="assets/images/tracking/line-off.svg" class="w-100" alt="" *ngIf="status === 0 ">
+              <img src="assets/images/tracking/line-on.svg" class="w-100" alt="" *ngIf="status != 0 ">
+
+            </div>
+            <div class="position-relative">
+              <img src="assets/images/tracking/way.svg" class="w-100" alt="">
+              <img src="assets/images/tracking/check.png" class=" position-absolute check" alt="" *ngIf="status >= 2">
+              <p class="text-center">{{'_OnWay' | translate}}</p>
+            </div>
+            <div>
+              <img src="assets/images/tracking/line-off.svg" class="w-100" alt="" *ngIf="status <  2 ">
+              <img src="assets/images/tracking/line-on.svg" class="w-100" alt="" *ngIf="status >= 2 ">
+            </div>
+            <div class="position-relative">
+              <img src="assets/images/tracking/delivered.svg" class="w-100" alt="">
+              <p class="text-center">{{'_Delivered' | translate}}</p>
+              <img src="assets/images/tracking/check.png" class=" position-absolute check" alt="" *ngIf="status == 3">
+
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-flex justify-content-center mb-5">
+          <div class=" text-center mx-2 " *ngIf="isLogin">
+            <a class="btn btn-primary text-white"
+               [routerLink]="'/account/shipment-details/' + this.id">{{'_GoToDetails' | translate}}</a>
+          </div>
+          <div class=" text-center mx-2" (click)="scroll(map)" *ngIf="id && status == 2">
+            <a class="btn btn-primary text-white">{{'_TrackOnMap' | translate}}</a>
+          </div>
+        </div>
+
+        <!--        <div class="w-100 text-center mt-3">-->
+        <!--          <h5>{{'_TrackOnMap' | translate}}</h5>-->
+        <!--          <div class="arrow bounce" (click)="scroll(map)">-->
+        <!--            <a class="fa fa-arrow-down fa-2x text-primary" #map></a>-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+
+      </div>
+    </div>
+  </div>
+  <div #map class="">
+    <app-tracking-map *ngIf="id && status == 2" [data]="data" ></app-tracking-map>
+  </div>
+</div>
+
+

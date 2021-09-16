@@ -1,0 +1,153 @@
+@import "../../_variables.scss";
+
+
+.stepper {
+  ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header-container{
+    padding: 0 10% ;
+  }
+
+  ::ng-deep .mat-stepper-horizontal-line {
+    border-color: $primary;
+    margin: 25px -16px 0;
+
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header {
+    height: 140px !important;
+    padding: 0 16px !important;
+  }
+
+  ::ng-deep .mat-step-label-selected .icon, .active {
+    //background: $primary !important;
+  }
+
+
+    .title{
+      font-size: 20px;
+      margin: 0;
+    }
+
+
+  .icon {
+    //background: black;
+    //padding: 12px;
+    //border-radius: 50%;
+    img {
+      width: 5rem;
+
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-top: 5px;
+  }
+
+
+  form , .form{
+    padding: 25px;
+    border:1px solid #b9b5b5;
+  }
+
+
+  ::ng-deep .mat-horizontal-content-container {
+    background: $success;
+    padding: 0 10%;
+  }
+
+  .radius-25 {
+    border-radius: 25px;
+  }
+
+  .input-group-text img {
+    width: 33px;
+  }
+
+  .input-group-text {
+    background-color: white;
+    border: 0px solid white;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  select {
+    //border-bottom-right-radius: 15px;
+    //border-top-right-radius: 15px;
+  }
+
+  .custom-select {
+    border: white;
+  }
+
+  .custom-select:focus {
+    box-shadow: none;
+  }
+
+  mat-panel-title {
+    span {
+      //font-size: 20px !important;
+      margin-left: 1.5rem !important;
+    }
+
+    img {
+      width: 3rem;
+    }
+  }
+
+
+
+.other {
+
+  img {
+    border: 1px solid white;
+    border-radius: 50%;
+    background: $primary;
+    padding: 5px;
+  }
+
+  span {
+    margin-left: 1.5rem;
+  }
+}
+
+.other input {
+  width: 100%;
+  border-radius: 10px;
+  border: 0;
+  height: 2.5rem;
+  padding: 0 10px;
+  background: #efebeb;
+}
+
+
+.result {
+
+  img {
+    height: 2.8rem;
+  }
+
+  .category {
+    font-size: 12px;
+  }
+}
+
+
+}
+
+
+.icon-express:before {
+  content: "\e900";
+  color: #ef5526;
+}
+
+.sub-cat {
+  img {
+    width: 1.7rem;
+  }
+}
+
+

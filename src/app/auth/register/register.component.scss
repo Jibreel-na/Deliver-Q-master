@@ -1,0 +1,79 @@
+@import "../../../_variables.scss";
+
+.login {
+
+  .h-3{
+    height: 3rem;
+  }
+
+  .icon {
+    width: 6rem;
+  }
+
+  .mat-icon {
+    color: $primary;
+  }
+
+  .info-side {
+    width: 35%;
+  }
+
+  .form-side {
+    width: 65%;
+  }
+
+  .desc {
+    font-size: 15px;
+  }
+
+  a:hover {
+    color: $primary;
+  }
+
+  ::ng-deep .mat-tab-labels{
+    justify-content: center !important;
+  }
+
+  ::ng-deep .mat-tab-label{
+   color: white;
+    background: $secondary;
+  }
+
+  ::ng-deep .mat-tab-label .mat-tab-label-content{
+    font-size: 1.3rem;
+  }
+
+  ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $primary;
+  }
+
+  #file-upload {
+    position: absolute;
+    @include left(-9999px);
+  }
+
+  label[for="file-upload"]{
+    padding:0.5em;
+    display:inline-block;
+    background:$secondary;
+    cursor:pointer;
+    border: 1px solid $secondary;
+    &:hover{background:darken($secondary ,17%);
+    }
+  }
+
+  #filename{
+    padding:0.5em;
+    @include left(left);
+    width:auto;
+    white-space: nowrap;
+    overflow:hidden;
+    background:white;
+    border: 1px solid $secondary;
+
+  }
+
+
+
+}
+

@@ -1,0 +1,27 @@
+<div class="text-left address-list position-relative" [dir]="lang">
+  <h5 class="text-center ">{{'_MyAddresses' | translate}}</h5>
+  <div class="position-absolute close" (click)="dialog.closeAll()"><i class="fa fa-times-circle" aria-hidden="true"></i>
+  </div>
+  <div class="text-center mt" *ngIf="isEmpty">{{'_YouDontHaveAddressesYet' | translate}}</div>
+  <div class="row border p-2 mb-3" *ngFor="let item of address" style="cursor: pointer">
+    <div class="col-md-10 mb-2 d-flex">
+      <i class="fa fa-map-marker text-primary mr-4" aria-hidden="true"></i>
+      <div>{{item.cityObj.title}}
+        , {{item.area}} , {{item.street}}
+        , {{item.building}} {{'_Building' | translate}} <span >,  {{'_Floor'| translate}} {{item.floor}},  <span *ngIf="item.type == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+        <span *ngIf="item.type == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+        {{item.apartment}} </span>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <i class="fa fa-phone text-primary mr-4" aria-hidden="true"></i>{{item.phone}}</div>
+    <div>
+      <button class="btn btn-primary float-right text-white"
+              (click)="selectAddress(item)">{{'_Select' | translate}}</button>
+    </div>
+  </div>
+</div>

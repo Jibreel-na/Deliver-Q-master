@@ -1,0 +1,535 @@
+<div class="container-fluid new-shipment">
+  <div class="row bg-shipment">
+    <div class="col-md-12 text-center py-5">
+      <h2 class="text-white">{{'_NewShipment' | translate}}
+      </h2>
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="container">
+      <div class="row">
+        <div class="text-center mb-4 w-100">
+          <!--          <p class="text-primary">{{'_ShippingCalculator' | translate}}</p>-->
+          <p>{{'_PutShippingItemInformation' | translate}}</p>
+        </div>
+        <div class="w-100 mb-4" *ngIf="guest">
+          <h4 class="px-2">{{'_UserInfo' | translate}}</h4>
+          <form [formGroup]="userForm" class="w-100 user-info-form">
+            <div class="d-flex flex-wrap w-100">
+              <mat-form-field appearance="legacy" class=" text-left px-3 w-50 ">
+                <mat-label>{{'_FirstName'|  translate}}</mat-label>
+                <input matInput placeholder="" formControlName="first_name">
+                <mat-icon matSuffix>sentiment_satisfied_alt</mat-icon>
+                <mat-error *ngIf="userForm.get('first_name').hasError('required')">
+                  {{'_FirstNameRequired' |  translate}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="legacy" class=" text-left   px-3 w-50 ">
+                <mat-label>{{'_LastName'|  translate}}</mat-label>
+                <input matInput placeholder="" formControlName="last_name">
+                <mat-icon matSuffix>sentiment_satisfied_alt</mat-icon>
+                <mat-error *ngIf="userForm.get('last_name').hasError('required')">
+                  {{'_LastNameRequired' |  translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex flex-wrap">
+              <mat-form-field appearance="legacy" class="text-left w-50  px-3">
+                <mat-label>{{'_Email'|  translate}}</mat-label>
+                <input matInput placeholder="" formControlName="email">
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-error>
+                  {{'_EmailNotValid' | translate}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="text-left  w-50 px-3">
+                <mat-label>{{'_Mobile' | translate}}</mat-label>
+                <span matPrefix>+971 &nbsp;</span>
+                <input type="tel" matInput placeholder="554 5***" formControlName="phone" maxlength="9">
+                <mat-icon matSuffix>mode_edit</mat-icon>
+                <mat-error>
+                  {{'_MobileRequired' |  translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6 my-3"  id="address1">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="icon">
+                <img src="assets/images/icon/step2.png"
+                     [ngClass]="fromAddress ? 'bg-primary' : ''"
+                     alt=""> <span class="mx-2">{{'_PickupAddress' | translate}}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="px-3 d-flex justify-content-between  py-4 align-items-center flex-wrap my-2" *ngIf="isLogin">
+              <button class="btn btn-secondary bg-white text-primary"
+                      (click)="listAddress('from') ; isNewAddress = false">{{'_SelectSavedAddresses' | translate}}
+              </button>
+              <div>
+                <h6 class="font-weight-normal">{{'_Or' | translate}}</h6>
+              </div>
+              <div (click)="isNewAddress = true; fromAddress = null">
+                <button class="btn btn-secondary bg-white text-primary my-2"><i class="fa fa-plus-circle mx-1 "
+                                                                                aria-hidden="true"></i>{{'_AddAddress' | translate}}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="isNewAddress">
+              <div class="w-100 position-relative mb-3">
+                <div>
+                  <img src="assets/images/map.PNG" class="w-100" alt="">
+                </div>
+                <div class="position-absolute select-location ">
+                  <button class="btn btn-primary radius-15"
+                          [ngClass]="startAddress.lng.value && startAddress.lat.value? 'btn-primary' : 'btn-secondary'"
+                          (click)="openMap('from')">
+                    <span
+                      *ngIf="!startAddress.lng.value || !startAddress.lat.value">{{'_SelectLocation' | translate}}</span>
+                    <span
+                      *ngIf="startAddress.lng.value && startAddress.lat.value ">{{'_UpdateLocation' | translate}}</span>
+                  </button>
+                </div>
+              </div>
+              <form [formGroup]="StartAddress" class="px-3 pb-4" [dir]="appService.lang"
+                    *ngIf="startAddress.lng.value && startAddress.lat.value">
+                <div class="d-flex mt-5">
+                  <!--                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"-->
+                  <!--                       [ngClass]="startAddress.type.value == 2? 'bg-primary' : ''"-->
+                  <!--                       (click)="startAddress.type.setValue(2) ">-->
+                  <!--                    <i class="fa fa-building" aria-hidden="true"-->
+                  <!--                       [ngClass]="startAddress.type.value == 2? 'text-white' : ''"></i> {{ '_Apartment' | translate}}-->
+                  <!--                  </div>-->
+                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+                       [ngClass]="startAddress.type.value == 1? 'bg-primary' : ''"
+                       (click)="startAddress.type.setValue(1) ">
+                    <i class="fa fa-home" aria-hidden="true"
+                       [ngClass]="startAddress.type.value == 1? 'text-white' : ''"></i> {{ '_House' | translate}}
+                  </div>
+                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+                       [ngClass]="startAddress.type.value == 3? 'bg-primary' : ''"
+                       (click)="startAddress.type.setValue(3) ">
+                    <i class="fa fa-briefcase" aria-hidden="true"
+                       [ngClass]="startAddress.type.value == 3? 'text-white' : ''"></i> {{ '_Office' | translate}}
+                  </div>
+                </div>
+                <mat-form-field class="w-100 mt-3">
+                  <mat-label>{{'_SelectCity' | translate}}</mat-label>
+                  <mat-select formControlName="city" (selectionChange)="selectCity(); f.cost.setValue(''); ">
+                    <mat-option *ngFor="let item of appService.cities" [value]="item._id"
+                                (click)="c.from.setValue(item._id)">
+                      {{item.title}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="StartAddress.get('city').hasError('required')">
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 text-left ">
+                  <mat-label>{{'_FullName'| translate}}</mat-label>
+                  <input matInput formControlName="name">
+                  <mat-error>
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 ">
+                  <mat-label>{{'_Mobile' | translate}}</mat-label>
+                  <span matPrefix>+971 &nbsp;</span>
+                  <input type="tel" matInput placeholder="554 5***" formControlName="phone" maxlength="9">
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                  <mat-error>
+                    {{'_MobileRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>
+                     <span *ngIf="startAddress.type.value == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+                    <span *ngIf="startAddress.type.value == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+                  </mat-label>
+                  <input matInput type="text" formControlName="apartment">
+                </mat-form-field>
+                <div *ngIf=" (startAddress.apartment.dirty || startAddress.apartment.touched) "
+                     class="text-danger text-primary">
+                  <div
+                    *ngIf="startAddress.type.value != 1 && startAddress.apartment.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Floor'| translate}}</mat-label>
+                  <input matInput type="text" formControlName="floor">
+                </mat-form-field>
+                <div *ngIf=" (startAddress.floor.dirty || startAddress.floor.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf="startAddress.type.value != 1 && startAddress.floor.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Building'| translate}}</mat-label>
+                  <input matInput formControlName="building">
+                  <mat-error *ngIf="StartAddress.get('building').hasError('required')">
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Area'| translate}}</mat-label>
+                  <input matInput formControlName="area">
+                  <mat-error>
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Street'| translate}}</mat-label>
+                  <input matInput formControlName="street">
+                  <mat-error>
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_AdditionalInformation'| translate}} <span class="optinal">({{'_Optional' | translate}}
+                    )</span>
+                  </mat-label>
+                  <input matInput formControlName="additional">
+                </mat-form-field>
+
+                <div class="mt-3" *ngIf="!guest">
+                  <button class="btn btn-primary" (click)="addAddress('from');  scroll('address1')"
+                          [disabled]="StartAddress.invalid">{{'_AddAddress' | translate}}</button>
+                </div>
+              </form>
+            </div>
+            <div *ngIf="fromAddress">
+              <div class="d-flex">
+                <i class="fa fa-map-marker text-primary mr-4" aria-hidden="true"></i>
+                <div>{{fromAddress.cityObj.title}}
+                  , {{fromAddress.area}} , {{fromAddress.street}}
+                  , {{fromAddress.building}} {{'_Building' | translate}}
+                  <span>,  {{'_Floor'| translate}} {{fromAddress.floor}}
+                    , <span *ngIf="fromAddress.type == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+        <span *ngIf="fromAddress.type == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+                    {{fromAddress.apartment}}  </span></div>
+
+              </div>
+              <div class="">
+                <i class="fa fa-phone text-primary mr-4" aria-hidden="true"></i>{{fromAddress.phone}}</div>
+            </div>
+          </mat-expansion-panel>
+
+
+        </div>
+        <div class="col-md-6 my-3" id="address2">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="icon">
+                <img src="assets/images/icon/step2.png"
+                     [ngClass]="targetAddress ? 'bg-primary' : ''"
+                     alt=""> <span class="mx-2">{{'_DropOffAddress' | translate}}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="px-3 d-flex justify-content-between py-4 align-items-center flex-wrap my-2" *ngIf="isLogin">
+              <button class="btn btn-secondary bg-white text-primary"
+                      (click)="isToAddress = false; listAddress('to')">{{'_SelectSavedAddresses' | translate}}
+              </button>
+              <div class="m-auto">
+                <h6 class="font-weight-normal">{{'_Or' | translate}}</h6>
+              </div>
+              <div (click)="isToAddress = true ; targetAddress = null">
+                <button class="btn btn-secondary bg-white text-primary my-2"><i class="fa fa-plus-circle mx-1"
+                                                                                aria-hidden="true"></i>{{'_AddAddress' | translate}}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="isToAddress">
+              <div class="w-100 position-relative mb-3">
+                <div>
+                  <img src="assets/images/map.PNG" class="w-100" alt="">
+                </div>
+                <div class="position-absolute select-location ">
+                  <button class="btn btn-primary radius-15"
+                          [ngClass]="toAddress.lng.value && toAddress.lat.value? 'btn-primary' : 'btn-secondary'"
+                          (click)="openMap('to')">
+                    <span *ngIf="!toAddress.lng.value || !toAddress.lat.value">{{'_SelectLocation' | translate}}</span>
+                    <span *ngIf="toAddress.lng.value && toAddress.lat.value ">{{'_UpdateLocation' | translate}}</span>
+                  </button>
+                </div>
+              </div>
+              <form [formGroup]="endAddress" class="px-3 pb-4" *ngIf="toAddress.lng.value && toAddress.lat.value"
+                    [dir]="appService.lang">
+                <div class="d-flex mt-5">
+                  <!--                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"-->
+                  <!--                       [ngClass]="toAddress.type.value == 2? 'bg-primary' : ''"-->
+                  <!--                       (click)="toAddress.type.setValue(2) ">-->
+                  <!--                    <i class="fa fa-building" aria-hidden="true"-->
+                  <!--                       [ngClass]="toAddress.type.value == 2? 'text-white' : ''"></i> {{ '_Apartment' | translate}}-->
+                  <!--                  </div>-->
+                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+                       [ngClass]="toAddress.type.value == 1? 'bg-primary' : ''"
+                       (click)="toAddress.type.setValue(1) ">
+                    <i class="fa fa-home" aria-hidden="true"
+                       [ngClass]="toAddress.type.value == 1? 'text-white' : ''"></i> {{ '_House' | translate}}
+                  </div>
+                  <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+                       [ngClass]="toAddress.type.value == 3? 'bg-primary' : ''"
+                       (click)="toAddress.type.setValue(3) ">
+                    <i class="fa fa-briefcase" aria-hidden="true"
+                       [ngClass]="toAddress.type.value == 3? 'text-white' : ''"></i> {{ '_Office' | translate}}
+                  </div>
+                </div>
+                <mat-form-field class="w-100 mt-3">
+                  <mat-label>{{'_SelectCity' | translate}}</mat-label>
+                  <mat-select formControlName="city" (selectionChange)="selectCity(); f.cost.setValue('')">
+                    <mat-option *ngFor="let item of appService.cities" [value]="item._id"
+                                (click)="c.to.setValue(item._id)">
+                      {{item.title}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="StartAddress.get('city').hasError('required')">
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 text-left ">
+                  <mat-label>{{'_FullName'| translate}}</mat-label>
+                  <input matInput formControlName="name">
+                  <mat-error>
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100 ">
+                  <mat-label>{{'_Mobile' | translate}}</mat-label>
+                  <span matPrefix>+971 &nbsp;</span>
+                  <input type="tel" matInput placeholder="554 5***" formControlName="phone" maxlength="9">
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                  <mat-error>
+                    {{'_MobileRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>
+                    <span *ngIf="toAddress.type.value == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+                    <span *ngIf="toAddress.type.value == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+                  </mat-label>
+                  <input matInput type="text" formControlName="apartment">
+                </mat-form-field>
+                <div *ngIf=" (toAddress.apartment.dirty || toAddress.apartment.touched) "
+                     class="text-danger text-primary">
+                  <div
+                    *ngIf="toAddress.type.value != 1 && toAddress.apartment.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Floor'| translate}}</mat-label>
+                  <input matInput type="text" formControlName="floor">
+                </mat-form-field>
+                <div *ngIf=" (toAddress.floor.dirty || toAddress.floor.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf="toAddress.type.value != 1 && toAddress.floor.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Building'| translate}}</mat-label>
+                  <input matInput formControlName="building">
+                  <mat-error *ngIf="StartAddress.get('building').hasError('required')">
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Area'| translate}}</mat-label>
+                  <input matInput formControlName="area">
+                  <mat-error>
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_Street'| translate}} <span class="optinal"></span>
+                  </mat-label>
+                  <input matInput formControlName="street">
+                  <mat-error *ngIf="StartAddress.get('street').hasError('required')">
+                    {{'_ThisFiledIsRequired' |  translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>{{'_AdditionalInformation'| translate}} <span class="optinal">({{'_Optional' | translate}}
+                    )</span>
+                  </mat-label>
+                  <input matInput formControlName="additional">
+                </mat-form-field>
+
+                <div class="mt-3" *ngIf="!guest">
+                  <button class="btn btn-primary" (click)="addAddress('to'); scroll('address2')"
+                          [disabled]="endAddress.invalid">{{'_AddAddress' | translate}}</button>
+                </div>
+              </form>
+            </div>
+            <div *ngIf="targetAddress">
+              <div class="d-flex">
+                <i class="fa fa-map-marker text-primary mr-4" aria-hidden="true"></i>
+                <div>{{targetAddress.cityObj.title}}
+                  , {{targetAddress.area}} , {{targetAddress.street}}
+                  , {{targetAddress.building}} {{'_Building' | translate}}
+                  <span>,  {{'_Floor'| translate}} {{targetAddress.floor}}
+                    ,  <span *ngIf="targetAddress.type == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+        <span *ngIf="targetAddress.type == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span> {{targetAddress.apartment}},  </span></div>
+
+              </div>
+              <div class="">
+                <i class="fa fa-phone text-primary mr-4" aria-hidden="true"></i>{{targetAddress.phone}}</div>
+            </div>
+          </mat-expansion-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row py-5 bg-success">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-center m-auto">
+            <div class="icon" [ngClass]="f.subCategory.value ? 'active' : ''">
+              <img src="assets/images/icon/step3.png" class="" alt="">
+            </div>
+            <div class="input-group my-auto radius-10 mx-3">
+              <div class="w-100 "><label class="">{{'_ParcelCategories' | translate}}</label></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4" *ngFor="let item of appService.categories">
+          <mat-accordion multi>
+            <mat-expansion-panel class="my-2 bg-success" [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <img [src]="appService.fileUrl + item.icon" alt=""> <span class="mx-1">{{item.title}}</span>
+                </mat-panel-title>
+                <mat-panel-description class="mx-2">
+                  {{'_UpTo' | translate}} {{item.weight}} {{'_KG' | translate}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <ng-container *ngFor="let sub of item.SubCategories">
+                <div class="d-flex justify-content-between border-bottom py-1"
+                     (click)="c.category.setValue(item._id)  ;f.subCategory.setValue(sub._id); f.other.setValue(sub.other) ;selectedCategory = sub.title ; f.cost.setValue('')">
+                  <div class="sub-cat">
+                    <p class="text-left mb-1" style="cursor: pointer">
+                      <img [src]="appService.fileUrl + sub.icon" alt="" class="mr-4" *ngIf="!sub.note" >
+                      <img [src]="appService.fileUrl + sub.icon" alt="" class="mr-4" *ngIf="sub.note"  data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                      <span>{{sub.title}}</span>
+                    </p>
+                  </div>
+                  <div class="bg-white radius-8 p-1 check">
+                    <div class="rounded-circle w-100 h-100 m-auto"
+                         [ngClass]="f.subCategory.value == sub._id? 'bg-primary' : 'bg-success'"></div>
+                  </div>
+                </div>
+                <div class="w-100" *ngIf="sub.other === 1 && f.subCategory.value === sub._id"><textarea type="text"
+                                                                                                        class="mt-3 w-100 radius-8 p-2"
+                                                                                                        (keyup)="f.comments.setValue($event.target.value)"
+                                                                                                        rows="3"
+                                                                                                        [value]="f.comments.value"
+                                                                                                        placeholder="{{'_WhatDoYouWantToShip' | translate}}"></textarea>
+                </div>
+              </ng-container>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-6 weight" dir="ltr">
+          <h6 class="font-weight-normal text-uppercase">{{'_TotalWeight' | translate}} <span
+            class="text-primary">({{'_Optional' | translate}})</span></h6>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <img src="assets/images/icon/kg.png" alt="">
+            </div>
+            <input type="number" class="form-control border-0" min="0" [value]="f.weight.value"
+                   (change)="f.weight.setValue($event.target.value)">
+            <div class="input-group-append bg-white kg ">
+              <span class="input-group-text bg-primary text-white border-white ">{{'_KG' | translate}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 calculate-button-div">
+          <button class="btn btn-secondary  calculate-button  radius-10  w-100 radius-8" *ngIf="!guest"
+                  [disabled]="calculatorForm.invalid || (f.other.value === 1 && !f.comments.value)"
+                  (click)=" calculator() "
+                  [ngClass]="calculatorForm.invalid || (f.other.value === 1 && !f.comments.value) ? 'bg-gray text-secondary' : 'btn-secondary text-white'">{{'_Calculate' | translate}}</button>
+          <button class="btn btn-secondary   radius-10 text-primary w-100 radius-8"
+                  [ngClass]="StartAddress.invalid || endAddress.invalid || userForm.invalid || calculatorForm.invalid ||(f.other.value === 1 && !f.comments.value) ? 'bg-gray text-secondary' : 'btn-secondary text-white'"
+                  *ngIf="guest"
+                  [disabled]="StartAddress.invalid || endAddress.invalid || userForm.invalid || calculatorForm.invalid ||(f.other.value === 1 && !f.comments.value)"
+                  (click)=" calculator()">{{'_Calculate' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="shipment">
+    <div class="row bg-shipment py-5"
+         *ngIf="isCalculate">
+      <div class="container bg-white radius-15 ">
+        <div class="row">
+          <div class="col-md-12 px-5 text-uppercase text-center bg-primary ">
+            <h3 class="text-white py-5"> {{'_YourShipment' | translate}}</h3>
+          </div>
+          <div class="col-md-12  bg-white result p-4 mt-4 radius-15 ship-info">
+            <div class="d-flex w-100  justify-content-between text-primary info-shipment">
+              <div class="my-auto location text-center">
+                <img src="assets/images/icon/from-location.png" class="h-75" alt="">
+                <span class="mx-1  ">{{from}}</span>
+              </div>
+              <div class="m-auto"><img src="assets/images/icon/arrow.png" class="" alt=""></div>
+              <div class="location m-auto text-center">
+                <img src="assets/images/icon/to-location.png" class="h-75 mx-1" alt=""><span
+                class="mx-1 h-75">{{to}}</span>
+              </div>
+              <div class="m-auto text-center"><img src="assets/images/icon/arrow.png" class="mx-1" alt=""></div>
+              <div class="my-auto location">
+                <img src="assets/images/icon/weight-shipment.png" alt="" class="h-75">
+                <span class="category text-center">{{selectedCategory}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 px-5 my-2" *ngFor="let item of appService.types" style="cursor: pointer">
+            <div class="radius-15  d-flex justify-content-between p-3"
+                 (click)="f.type.setValue(item._id)"
+                 [ngClass]="f.type.value == item._id ? 'active-type' : 'unactive-type'">
+              <div class="duration text-center radius-15 m-auto p-2">
+                <img [src]="appService.fileUrl + item.image" alt="" class="w-50 h-auto">
+                <p>{{item.duration}}</p>
+              </div>
+              <div class="p-2 price m-auto">
+                <p>{{item.title}}</p>
+                <h6>{{item.price + f.cost.value}} {{'_AED' | translate}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-5 text-center mt-5 ">
+            <button
+              class="btn btn-secondary px-5 bg-white text-primary radius-15 mx-2 proceed-button"
+              (click)="createShipment()" *ngIf="!guest"
+              [disabled]=" calculatorForm.invalid  || !f.type.value">{{'_Proceed' | translate}}</button>
+            <button
+              class="btn btn-secondary px-5 bg-white text-primary radius-15 mx-2 proceed-button"
+              (click)="sendOTPGuest()" *ngIf="guest"
+              [disabled]=" calculatorForm.invalid  || !f.type.value || userForm.invalid">{{'_Proceed' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+.calculator-page{
+  .step img {
+    background: black;
+    padding: 12px;
+    border-radius: 50%;
+    width: 3.8rem;
+  }
+
+  mat-panel-title{
+    img{
+      width: 3rem;
+    }
+  }
+
+  .sub-cat {
+    img {
+      width: 1.7rem;
+    }
+  }
+
+  .calculate-button-div{
+    padding-top: 30px;
+  }
+
+  .bg-shipment{
+    background-image: url("../../assets/images/payment-type.jpg");
+  }
+
+  mat-panel-title img {
+    width: 3rem ;
+  }
+
+  mat-expansion-panel-header{
+    height: 85px !important;
+  }
+}

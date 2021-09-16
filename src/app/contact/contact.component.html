@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row bg-contact">
+    <div class="col-md-12 text-center py-5">
+      <h1 class="text-white">{{'_Contact' | translate}} <span class="font-weight-normal">{{'_Us' | translate}}</span>
+      </h1>
+    </div>
+  </div>
+  <div class="row py-5 bg-about-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 my-3">
+          <form [formGroup]="contactForm" class="text-center">
+            <h5 class="text-primary">{{'_GetInTouch' | translate}}</h5>
+            <input class="form-control radius-15 my-2" type="text" formControlName="name"
+                   placeholder="{{'_FullName' | translate}}">
+            <div class="text-left">
+              <div *ngIf=" (f.name.dirty || f.name.touched) "
+                   class="text-danger">
+                <div
+                  *ngIf="f.name.value != 1 && f.name.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+              </div>
+            </div>
+            <input class="form-control radius-15 my-2" type="text" formControlName="email"
+                   placeholder="{{'_Email' | translate}}">
+            <div class="text-left ">
+              <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
+                   class="text-danger">
+                <div *ngIf="f.email.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                <div *ngIf="f.email.errors.email">{{'_EmailNotValid' | translate}}</div>
+              </div>
+            </div>
+            <textarea class="form-control radius-15 my-2" type="text" rows="4" formControlName="details"
+                      placeholder="{{'_Message' | translate}}"></textarea>
+            <div class="text-left">
+              <div *ngIf=" (f.details.dirty || f.details.touched) "
+                   class="text-danger">
+                <div
+                  *ngIf="f.details.value != 1 && f.details.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+              </div>
+            </div>
+            <button class="btn btn-secondary radius-15 mt-3 px-5"
+                    [disabled]="contactForm.invalid" (click)="contactus(3)">{{'_Submit' | translate}}</button>
+          </form>
+        </div>
+        <div class="col-md-6 contact-info m-auto">
+          <div class="d-flex mt-3  ">
+            <div class="mx-3 "><img src="assets/images/icon/location.png" alt=""></div>
+            <div class="">
+              <h6 class="mb-1 text-primary border-primary border-bottom title">{{'_OurLocation' | translate}}</h6>
+              <p class="desc">{{'_AddressContactUs' | translate}} </p>
+            </div>
+          </div>
+          <div class="d-flex mt-3 ">
+            <div class="mx-3 "><img src="assets/images/icon/call-us.png" alt=""></div>
+            <div class="">
+              <h6 class="mb-1 text-primary border-primary border-bottom title">{{'_CallUs' | translate}}</h6>
+              <p class="desc" dir="ltr">+971 4 872 7125</p>
+            </div>
+          </div>
+          <div class="d-flex mt-3 ">
+            <div class="mx-3 "><img src="assets/images/icon/mail-us.png" alt=""></div>
+            <div class="">
+              <h6 class="mb-1 text-primary border-primary border-bottom title">{{'_MailUs' | translate}}</h6>
+              <p class="desc">Info@DeliverQ.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6  mt-5 text-center " style="cursor: pointer">
+          <div class="border radius-8 p-2">
+            <img src="assets/images/individual.svg" class="w-50" alt="">
+            <p>{{'_Individual' | translate}}</p>
+            <form [formGroup]="indivisualForm" class="text-center">
+              <h5 class="text-primary">{{'_GetInTouch' | translate}}</h5>
+              <input class="form-control radius-15 my-2" type="text" formControlName="name"
+                     placeholder="{{'_FullName' | translate}}">
+              <div class="text-left">
+                <div *ngIf=" (d.name.dirty || d.name.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf="d.name.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+              </div>
+              <input class="form-control radius-15 my-2" type="text" formControlName="email"
+                     placeholder="{{'_Email' | translate}}">
+              <div class="text-left ">
+                <div *ngIf="d.email.invalid && (d.email.dirty || d.email.touched)"
+                     class="text-danger">
+                  <div
+                    *ngIf="d.email.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                  <div *ngIf="d.email.errors.email">{{'_EmailNotValid' | translate}}</div>
+                </div>
+              </div>
+              <input class="form-control radius-15 my-2" type="text" formControlName="phone" maxlength="10"
+                     placeholder="{{'_Mobile' | translate}}: 055***">
+              <div class="text-left text-danger" *ngIf="d.phone.invalid && (d.phone.dirty || d.phone.touched)">
+                <div *ngIf="d.phone.errors.required">
+                  {{'_ThisFiledIsRequired' | translate}}
+                </div>
+                <div *ngIf="d.phone.errors.pattern || (d.phone.value.length < 9 && d.phone.value.length > 0)">{{'_MobileRequired' | translate}}</div>
+              </div>
+              <textarea class="form-control radius-15 my-2" type="text" rows="4" formControlName="details"
+                        placeholder="{{'_Message' | translate}}"></textarea>
+              <div class="text-left">
+                <div *ngIf=" (d.details.dirty || d.details.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf=" d.details.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary radius-15 mt-3 px-5"
+                      [disabled]="indivisualForm.invalid" (click)="contactus(2)">{{'_Submit' | translate}}</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 text-center mt-5 " style="cursor: pointer">
+          <div class="border radius-8 p-2">
+            <img src="assets/images/company.svg" alt="" class="w-50">
+            <p>{{'_ECommerce' | translate}}</p>
+            <form [formGroup]="companyForm" class="text-center">
+              <h5 class="text-primary">{{'_GetInTouch' | translate}}</h5>
+              <input class="form-control radius-15 my-2" type="text" formControlName="name"
+                     placeholder="{{'_CompanyName' | translate}}">
+              <div class="text-left">
+                <div *ngIf=" (c.name.dirty || c.name.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf="c.name.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+              </div>
+              <input class="form-control radius-15 my-2" type="text" formControlName="email"
+                     placeholder="{{'_Email' | translate}}">
+              <div class="text-left ">
+                <div *ngIf="c.email.invalid && (c.email.dirty || c.email.touched)"
+                     class="text-danger">
+                  <div
+                    *ngIf="c.email.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                  <div *ngIf="c.email.errors.email">{{'_EmailNotValid' | translate}}</div>
+                </div>
+              </div>
+              <input class="form-control radius-15 my-2" type="text" formControlName="phone" maxlength="10"
+                     placeholder="{{'_Mobile' | translate}}: 055***">
+                <div class="text-left text-danger" *ngIf="c.phone.invalid && (c.phone.dirty || c.phone.touched)">
+                  <div *ngIf="c.phone.errors.required">
+                    {{'_ThisFiledIsRequired' | translate}}
+                  </div>
+                  <div *ngIf="c.phone.errors.pattern || (c.phone.value.length < 9 && c.phone.value.length > 0)">{{'_MobileRequired' | translate}}</div>
+                </div>
+
+              <textarea class="form-control radius-15 my-2" type="text" rows="4" formControlName="details"
+                        placeholder="{{'_Message' | translate}}"></textarea>
+              <div class="text-left">
+                <div *ngIf=" (c.details.dirty || c.details.touched) "
+                     class="text-danger">
+                  <div
+                    *ngIf=" c.details.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary radius-15 mt-3 px-5"
+                      [disabled]="companyForm.invalid" (click)="contactus(1)">{{'_Submit' | translate}}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

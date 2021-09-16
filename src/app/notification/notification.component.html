@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <div class="row    "
+         infiniteScroll
+         [infiniteScrollDistance]="0"
+         [infiniteScrollThrottle]="300"
+         (scrolled)="restService.notifications.length >= 20 && (filter.page = filter.page + 1); restService.notifications.length >= 20 && restService.getNotifications(filter.page)"
+
+    >
+        <ng-container *ngFor="let item of restService.allNotifications" >
+            <div class="col-md-12" (click)="restService.updateNotification(item)">
+                <div class=" d-flex flex-wrap justify-content-start my-3 p-3  border-left"  [ngClass]="item.read? 'border-secondary bg-white read' : 'border-primary bg-light notifications'">
+                    <div class="my-auto">
+                        <i aria-hidden="true" class="fa fa fa-bell-o mx-1 "
+                           [ngClass]="item.read? 'text-secondary' : 'text-primary'"></i>
+                    </div>
+                    <div class="mx-5 text-left">
+                        <h6>{{item.title}}</h6>
+                        <p>{{item.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="stepper">
+  <mat-horizontal-stepper class="bg-secondary pt-3 " [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstStep">
+      <form [formGroup]="firstStep" [dir]="appService.lang">
+        <ng-template matStepLabel class="text-center">
+          <p class="text-success title">{{'_From' | translate}}</p>
+            <div class="icon" [ngClass]="f.from.value? 'active': ''"><img
+            [src]="f.from.value ? 'assets/images/step1.png' : 'assets/images/step1-inactive.png'" class="steps"
+            alt=""></div>
+
+        </ng-template>
+        <div class="input-group  radius-10" dir="ltr">
+          <div class="w-100 text-secondary"><label class="">{{'_From' | translate}}</label></div>
+          <div class="input-group-prepend">
+            <label class="input-group-text text-success" for="inputGroupSelect01"><img
+              src="assets/images/icon/city.png" alt=""></label>
+          </div>
+          <select class=" text-left custom-select radius-10" id="inputGroupSelect01" formControlName="from"
+                  (change)="f.from.setValue($event.target.value); selectCity('from') ">
+            <option selected disabled class="text-left">{{'_ChooseCity' | translate}}
+            </option>
+            <option *ngFor="let item of appService.cities" [value]="item._id" class="text-left">{{item.title}}</option>
+
+          </select>
+        </div>
+        <div class="text-left mt-2">
+          <button mat-button matStepperNext class="btn btn-primary border  radius-10"
+                  [disabled]="firstStep.invalid">{{'_Next' | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondStep">
+      <ng-template matStepLabel class="text-center">
+        <p class="text-success title">{{'_To' | translate}}</p>
+        <div class="icon " [ngClass]="f.to.value? 'active': ''"><img
+          [src]="f.to.value ? 'assets/images/step2.png' : 'assets/images/step2-inactive.png'" class=""
+          alt=""></div>
+      </ng-template>
+      <form [formGroup]="secondStep" [dir]="appService.lang">
+        <div class="input-group  radius-10" dir="ltr">
+          <div class="w-100 text-secondary"><label class="">{{'_To' | translate}}</label></div>
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect02"><img src="assets/images/icon/city.png"
+                                                                          alt=""></label>
+          </div>
+          <select class="custom-select radius-10" id="inputGroupSelect02" formControlName="to"
+                  (change)="f.to.setValue($event.target.value); selectCity('to') ">
+            <option selected disabled>{{'_ChooseCity' | translate}}</option>
+            <option (click)="to = item.title" *ngFor="let item of appService.cities"
+                    [value]="item._id">{{item.title}}</option>
+
+          </select>
+        </div>
+        <div class="text-left mt-2">
+          <button mat-button matStepperPrevious
+                  class="btn btn-primary border  radius-10 mx-2">{{'_Back' | translate}}</button>
+          <button mat-button matStepperNext class="btn btn-primary border  radius-10"
+                  [disabled]="secondStep.invalid">{{'_Next' | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel class="text-center">
+        <p class="text-success title">{{'_What' | translate}}</p>
+        <div class="icon "><img [src]=" f.category.value?'assets/images/step3.png':  'assets/images/step3-inactive.png'"
+                                alt="" class=""></div>
+      </ng-template>
+      <div *ngIf="!isDone && appService.categories.length" class="form">
+        <p class=" text-center mt-3">{{'_ParcelCategories' | translate}}</p>
+        <mat-accordion multi *ngFor="let item of appService.categories">
+          <mat-expansion-panel class="my-2">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img [src]="appService.fileUrl + item.icon" alt="" class=""> <span class="mx-1">{{item.title}}</span>
+              </mat-panel-title>
+              <mat-panel-description class="mx-1">
+                {{'_UpTo' | translate}} {{item.weight}} {{'_KG' | translate}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let sub of item.SubCategories">
+              <div class="d-flex justify-content-between border-bottom py-1 sub-cat"
+                   (click)="f.subCategory.setValue(sub._id) ; f.category.setValue(item._id); f.selectedCategory.setValue(sub.title) ; f.other.setValue(sub.other) ; f.cost.setValue('')">
+                <div class="">
+                  <p class="text-left mb-1" style="cursor: pointer"><img
+                    [src]="appService.fileUrl + sub.icon" alt="" class="mr-4"  *ngIf="!sub.note">
+                    <img [src]="appService.fileUrl + sub.icon" alt="" class="mr-4" *ngIf="sub.note"  data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+
+                    <span>{{sub.title}}</span>
+                  </p>
+                </div>
+                <div class="bg-white radius-8 p-1 check">
+                  <div class="rounded-circle w-100 h-100 m-auto"
+                       [ngClass]="f.subCategory.value == sub._id? 'bg-primary' : 'bg-success'"></div>
+                </div>
+              </div>
+              <div class="w-100" *ngIf="sub.other === 1 && f.subCategory.value === sub._id; "><textarea type="text"
+                                                                                                        class="mt-3 w-100 radius-8 p-2"
+                                                                                                        (keyup)="f.comments.setValue($event.target.value)"
+                                                                                                        rows="3"
+                                                                                                        placeholder="{{'_WhatDoYouWantToShip' | translate}}"></textarea>
+              </div>
+            </ng-container>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="mt-4 weight" dir="ltr">
+          <h6 class="font-weight-normal text-uppercase">{{'_TotalWeight' | translate}} <span
+            class="">({{'_Optional' | translate}})</span></h6>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <img src="assets/images/icon/kg.png" alt="">
+            </div>
+            <input type="number" class="form-control border-0" aria-label="Amount (to the nearest dollar)"
+                   (change)="f.weight.setValue($event.target.value)">
+            <div class="input-group-append bg-white kg ">
+              <span class="input-group-text bg-primary text-white border-white ">{{'_KG' | translate}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-secondary text-white radius-10 w-100"
+                  [disabled]="calculatorForm.invalid || (f.other.value === 1 && !f.comments.value)"
+                  (click)="calculator()">{{'_Calculate' | translate}}</button>
+        </div>
+      </div>
+      <div class="bg-white result p-4 mt-4 radius-15" *ngIf="isDone">
+        <div class="d-flex w-100  justify-content-between text-primary ">
+          <div class="m-auto"><img src="assets/images/icon/from-location.png" alt=""><span class="mx-1 ">{{from}}</span>
+          </div>
+          <div class="my-auto"><img src="assets/images/icon/arrow.png" class="h-auto" alt=""></div>
+          <div class="m-auto"><img src="assets/images/icon/to-location.png" alt=""><span class="mx-1">{{to}}</span>
+          </div>
+          <div class="my-auto"><img src="assets/images/icon/arrow.png" class="h-auto" alt=""></div>
+          <div class="mx-auto">
+            <img src="assets/images/icon/weight-shipment.png" alt="">
+            <p class="category">{{f.selectedCategory.value}}</p>
+          </div>
+        </div>
+        <div>
+          <div class="d-flex w-100  justify-content-between ">
+            <div style="cursor: pointer" class="radius-15  d-flex justify-content-between flex-wrap p-3 mr-2 "
+                 *ngFor="let item of appService.types" (click)="f.type.setValue(item._id)"
+                 [ngClass]="f.type.value == item._id ? 'active-type' : 'unactive-type'">
+              <div class=" radius-15 m-auto p-2 duration">
+                <img [src]="appService.fileUrl + item.image" alt="" class="w-100 h-auto">
+                <p>{{item.duration}}</p>
+              </div>
+              <div class="p-2 text-center price m-auto">
+                <p>{{item.title}}</p>
+                <h6>{{item.price + f.cost.value}} {{'_AED' | translate}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3 d-flex justify-content-between flex-wrap ">
+            <button
+              class="btn btn-secondary w-100 bg-white text-primary  m-2"
+              (click)="proceed()">{{'_Proceed' | translate}}</button>
+            <button class="btn btn-secondary  w-100    m-2"
+                    (click)="reset() ; stepper.reset()">{{'_CalculateAgain' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

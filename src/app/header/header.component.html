@@ -1,0 +1,82 @@
+<header class="bg-secondary py-2 border-primary border-bottom header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-right contact">
+        <div class="d-flex text-secondary justify-content-start">
+          <div class="mx-3 d-flex"  style="cursor: pointer"><i class="fa fa-phone-square mr-1 text-primary" aria-hidden="true"></i> <p class="text-white" dir="ltr">+971 4 872 7125</p>
+          </div>
+          <div style="cursor: pointer"><i class="fa fa-map-marker mr-1 text-primary" aria-hidden="true" ></i> <a class="text-secondary"
+                                                                                                                 target="_blank"
+                                                                                                                 href="https://goo.gl/maps/hjc9gUvQL2B5KLXy6"><span class="text-white">{{ '_FindUs' | translate}}</span></a></div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-md navbar-dark ">
+          <a class="navbar-brand is-mobile" style="cursor: pointer"><img src="assets/images/logo.png" alt=""
+                                                                         class="logo"> <img src="assets/images/logo-footer.png" alt="" class="logo-black"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="d-flex justify-content-between list w-100">
+              <div class="is-desk" routerLink="/home"  style="cursor: pointer"><img src="assets/images/logo.png" alt="" class="logo" >    <img src="assets/images/logo-footer.png" alt="" class="logo-black">
+              </div>
+              <ul class="navbar-nav ">
+                <li class="nav-item" routerLink="/home" routerLinkActive="active">
+                  <a class="nav-link">{{'_Home' | translate}}</a>
+                </li>
+                <li class="nav-item" routerLink="/new-shipment" routerLinkActive="active">
+                  <a class="nav-link">{{'_NewShipment' | translate}}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/calculator" routerLinkActive="active">{{'_Calculator' | translate}}</a>
+                </li>
+                <li class="nav-item " routerLink="/about-us" routerLinkActive="active">
+                  <a class="nav-link">{{'_AboutUs' | translate}} </a>
+                </li>
+                <li class="nav-item " routerLink="/contactus" routerLinkActive="active">
+                  <a class="nav-link">{{'_ContactUs' | translate}}</a>
+                </li>
+              </ul>
+              <div class="my-auto">
+                <div class="nav-item justify-content-center d-flex lang-account">
+                  <div class="account-list-header nav-item " *ngIf="isLogin" routerLinkActive="active">
+                    <div class="dropdown w-100 hover" style="cursor: pointer">
+                      <a class="nav-link">{{'_Account' | translate}}</a>
+                      <ul class="px-2 text-left radius-5">
+                        <li class=""><a routerLink="/account/profile">{{'_MyProfile' | translate}}</a></li>
+                        <li class=""><a routerLink="/account/my-shipments">{{'_MyShipments' | translate}}</a></li>
+                        <li class=""><a routerLink="/account/addresses">{{'_MyAddresses' | translate}}</a></li>
+                        <li class=""><a routerLink="/account/privacy">{{'_Privacy' | translate}}</a></li>
+                        <li class="" (click)="logout()"><a class="text-primary">{{'_Logout' | translate}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div  routerLinkActive="active" routerLink="/auth/login"
+                      style="cursor: pointer" alt="" class="   nav-link" *ngIf="!isLogin"><a >{{'_Login/Register' | translate}}</a></div>
+                  <a class="nav-link" *ngIf="appService.currentLanguage == 'ar' " style="cursor: pointer"
+                     (click)="appService.switchLanguage('en')"><span src="assets/images/icon/lang-en.png" alt=""
+                                                                     class="lang-icon">EN</span></a>
+                  <a class="nav-link" *ngIf="appService.currentLanguage == 'en' " style="cursor: pointer"
+                     (click)="appService.switchLanguage('ar')"><span src="assets/images/icon/lang-en.png" alt=""
+                                                                     class="lang-icon">AR</span></a>
+                  <div routerLink="/notifications" class="position-relative mt-1 " *ngIf="isLogin" >
+                    <img src="assets/images/icon/notification.svg" style="cursor: pointer" alt=""
+                         class="user-icon mt-1">
+                    <div class="position-absolute notification"  style="cursor: pointer" *ngIf="notificationCount > 0">{{notificationCount}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

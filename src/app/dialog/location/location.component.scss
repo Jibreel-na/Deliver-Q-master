@@ -1,0 +1,34 @@
+@import "../../../variables";
+
+.map {
+  max-width: 30rem;
+  max-height: 30rem;
+
+  .search-location {
+    border-color: $primary;
+  }
+
+  img{
+    width: 2rem;
+  }
+  agm-map {
+    height: 20rem;
+    width: 30rem;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+  }
+
+
+
+
+}
+
+
+::ng-deep .pac-container{
+  background-color: #FFF !important;
+  position: fixed !important;
+  display: inline-block ;
+  float: left !important;
+}

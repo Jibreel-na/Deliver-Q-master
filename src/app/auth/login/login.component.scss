@@ -1,0 +1,28 @@
+@import "../../../_variables.scss";
+
+.login{
+  .icon{
+    width: 6rem;
+  }
+
+  .mat-icon{
+    color: $primary;
+  }
+
+  .info-side{
+    width: 35%;
+  }
+
+  .form-side{
+    width: 65%;
+  }
+
+  .desc{
+    font-size: 14px;
+  }
+
+  .forget{
+    font-size: 15px;
+  }
+
+}

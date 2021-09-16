@@ -1,0 +1,141 @@
+<div class="addressDialog">
+  <div class="w-100 position-relative mb-3">
+    <div>
+      <img src="assets/images/map.PNG" class="w-100" alt="">
+    </div>
+    <div class="position-absolute select-location ">
+      <button class="btn btn-primary radius-15" [ngClass]="f.lng.value && f.lat.value? 'btn-primary' : 'btn-secondary'"
+              (click)="openMap()">
+        <span *ngIf="!f.lng.value || !f.lat.value">{{'_SelectLocation' | translate}}</span>
+        <span *ngIf="f.lng.value && f.lat.value ">{{'_UpdateLocation' | translate}}</span>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="addressForm" class="px-3 pb-4" *ngIf="f.lng.value && f.lat.value">
+
+    <div class="d-flex mt-5">
+      <!--    <div class="border radius-8 mx-2 p-2" style="cursor: pointer"-->
+      <!--         [ngClass]="f.type.value == 2? 'bg-primary' : ''"-->
+      <!--         (click)="f.type.setValue(2) ">-->
+      <!--      <i class="fa fa-building" aria-hidden="true"-->
+      <!--         [ngClass]="f.type.value == 2? 'text-white' : ''"></i> {{ '_Apartment' | translate}}-->
+      <!--    </div>-->
+
+      <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+           [ngClass]="f.type.value == 1? 'bg-primary' : ''"
+           (click)="f.type.setValue(1) ">
+        <i class="fa fa-home" aria-hidden="true"
+           [ngClass]="f.type.value == 1? 'text-white' : ''"></i> {{ '_House' | translate}}
+      </div>
+      <div class="border radius-8 mx-2 p-2" style="cursor: pointer"
+           [ngClass]="f.type.value == 3? 'bg-primary' : ''"
+           (click)="f.type.setValue(3) ">
+        <i class="fa fa-briefcase" aria-hidden="true"
+           [ngClass]="f.type.value == 3? 'text-white' : ''"></i> {{ '_Office' | translate}}
+      </div>
+    </div>
+
+    <mat-form-field class="w-100 text-left mt-3">
+      <mat-label>{{'_SelectCity' | translate}}</mat-label>
+      <mat-select formControlName="city">
+        <mat-option *ngFor="let item of appService.cities" [value]="item._id">
+          {{item.title}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="addressForm.get('city').hasError('required')">
+        {{'_ThisFiledIsRequired' |  translate}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-100 text-left ">
+      <mat-label>{{'_FullName'| translate}}</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="addressForm.get('name').hasError('required')">
+        {{'_ThisFiledIsRequired' |  translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-left ">
+      <span matPrefix>+971 &nbsp;</span>
+      <mat-label>{{'_PhoneNumber'| translate}}</mat-label>
+      <input matInput placeholder="55123****" formControlName="phone" type="tel" minLength="9"
+             maxlength="9">
+      <mat-error>
+        <div *ngIf="f.phone.invalid && (f.phone.dirty || f.phone.touched)">
+          <div *ngIf="f.phone.errors.required">
+            {{'_ThisFiledIsRequired' | translate}}
+          </div>
+          <div *ngIf="f.phone.errors.pattern || f.phone.value.length < 9">{{'_MobileRequired' | translate}}</div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-left">
+      <mat-label>
+    <span *ngIf="f.type.value == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+        <span *ngIf="f.type.value == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+      </mat-label>
+      <input matInput type="text" formControlName="apartment">
+    </mat-form-field>
+    <div *ngIf=" (f.apartment.dirty || f.apartment.touched) "
+         class="text-danger text-primary">
+      <div
+        *ngIf="f.type.value != 1 && f.apartment.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+    </div>
+
+    <mat-form-field class="w-100 text-left">
+      <mat-label>{{'_Floor'| translate}}</mat-label>
+      <input matInput type="text" formControlName="floor">
+    </mat-form-field>
+    <div *ngIf=" (f.floor.dirty || f.floor.touched) "
+         class="text-danger">
+      <div
+        *ngIf="f.type.value != 1 && f.floor.value.length == 0">{{'_ThisFiledIsRequired' | translate}}</div>
+    </div>
+
+    <mat-form-field class="w-100 text-left">
+      <mat-label>{{'_Building'| translate}}</mat-label>
+      <input matInput formControlName="building">
+      <mat-error *ngIf="addressForm.get('building').hasError('required')">
+        {{'_ThisFiledIsRequired' |  translate}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-100 text-left">
+      <mat-label>{{'_Area'| translate}}</mat-label>
+      <input matInput formControlName="area">
+      <mat-error *ngIf="addressForm.get('area').hasError('required')">
+        {{'_ThisFiledIsRequired' |  translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-left">
+      <mat-label>{{'_Street'| translate}} <span class="optional"></span></mat-label>
+      <input matInput formControlName="street">
+      <mat-error>
+        {{'_ThisFiledIsRequired' |  translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>{{'_AdditionalInformation'| translate}} <span class="optional">({{'_Optional' | translate}})</span>
+      </mat-label>
+      <input matInput formControlName="additional">
+    </mat-form-field>
+    <div class="text-right">
+      <button class="btn btn-primary mx-1" [disabled]="addressForm.invalid" (click)="addAddress()"
+              *ngIf="!data">{{'_Add' | translate}}</button>
+      <button class="btn btn-primary mx-1" [disabled]="addressForm.invalid" (click)="EditAddress()"
+              *ngIf="data">{{'_Edit' | translate}}</button>
+      <button class="btn btn-success mx-1" (click)="dialog.closeAll()">{{'_Close' | translate}}</button>
+    </div>
+
+
+  </form>
+</div>

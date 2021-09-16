@@ -1,0 +1,32 @@
+@import '../../_variables.scss';
+
+
+footer {
+  p {
+    font-size: 15px;
+
+  }
+
+  .logo-footer {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .contact {
+    font-size: 15px;
+  }
+
+  a {
+    cursor: pointer;
+    color: $secondary;
+    font-size: 15px;
+
+  }
+
+  input, button {
+    font-size: 15px;
+  }
+
+
+}

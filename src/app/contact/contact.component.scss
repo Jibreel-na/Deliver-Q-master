@@ -1,0 +1,23 @@
+.contact-info {
+  img {
+    width: 4rem;
+  }
+
+  .desc {
+    font-size: 14px;
+  }
+
+  .title{
+    font-size: 16px;
+  }
+}
+
+.bg-contact{
+  background-image: url("../../assets/images/bg-contact.jpg");
+}
+
+.text-danger{
+  color: #f44336 !important;
+  font-size: 75%;
+  margin-top: -5px
+}

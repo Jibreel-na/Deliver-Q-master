@@ -1,0 +1,101 @@
+<div class="radius-15" *ngIf="details">
+  <div class="w-100 py-5 bg-primary text-center text-white ">
+   <h3 class="font-weight-normal"> {{'_ShipmentDetails' | translate}}</h3>
+  </div>
+  <div class="bg-white p-5">
+    <div class="mb-4"><span class="text-primary">{{'_TrackingTag' | translate}}:</span> {{details.tag}}</div>
+    <div class="radius-8 align-items-center-center d-flex justify-content-start border-primary border p-3">
+      <div class="item"><img src="assets/images/icon/step3.png" alt=""></div>
+      <div class="ml-4 my-auto">
+        <div class="border-bottom text-center">
+          {{'item' | translate}}
+        </div>
+        <div>
+          <span *ngIf="details.other == 0">{{details?.subCategoryObj.title}}</span> <span *ngIf="details.comments">{{details.comments}}</span>
+          <span *ngIf="details.weight">({{details.weight}} {{'KG' | translate}})</span>
+        </div>
+      </div>
+    </div>
+    <div class="radius-8 my-3 d-flex justify-content-start border-primary border p-3">
+      <div class="item my-auto"><img src="assets/images/icon/step2.png" alt="" class=""></div>
+      <div class="ml-4 my-auto">
+        <div class="border-bottom text-center">
+          {{'_PickupAddress' | translate}}
+        </div>
+        <div class="d-flex mt-2">
+          <i class="fa fa-map-marker text-primary mr-2 mt-1" aria-hidden="true"></i>
+          <div>{{details.fromObj.cityObj.title}}
+            , {{details.fromObj.area}} , {{details.fromObj.street}}
+            , {{details.fromObj.building}} {{'_Building' | translate}} <span
+              *ngIf="details.fromObj.type != 1">,  {{'_Floor'| translate}} {{details.fromObj.floor}}
+              ,
+              <span *ngIf="details.type == 1">
+                    {{'_ApartmentNO'| translate}}
+                  </span>
+        <span *ngIf="details.type == 3">
+                    {{'_OfficeNo'| translate}}
+                  </span>
+               {{details.fromObj.apartment}}  </span>
+          </div>
+        </div>
+        <div class="mt-2">
+          <i class="fa fa-phone text-primary  mr-2 mt-1" aria-hidden="true"></i>{{details.fromObj.phone}}</div>
+      </div>
+    </div>
+    <div class="radius-8 my-3 d-flex my-auto justify-content-start border-primary border p-3">
+      <div class="item my-auto"><img src="assets/images/icon/step2.png" alt=""></div>
+      <div class="ml-4 my-auto">
+        <div class="border-bottom text-center">
+          {{'_DropOffAddress' | translate}}
+        </div>
+        <div class="d-flex mt-2">
+          <i class="fa fa-map-marker text-primary  mr-2 mt-1" aria-hidden="true"></i>
+          <div>  {{details.toObj.cityObj.title}}
+            , {{details.toObj.area}} , {{details.toObj.street}}
+            , {{details.toObj.building}} {{'_Building' | translate}} <span
+              *ngIf="details.toObj.type != 1">,  {{'_Floor'| translate}} {{details.toObj.floor}}
+              , {{'_ApartmentNo' | translate}} {{details.toObj.apartment}},  </span>
+          </div>
+        </div>
+        <div class="mt-2">
+          <i class="fa fa-phone text-primary  mr-2 mt-1" aria-hidden="true"></i>{{details.toObj.phone}}</div>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-between align-items-center-center my-3">
+      <div class="radius-8 bg-success p-3">
+        <div class="item-payment bg-success"><img [src]="appService.fileUrl + details.typeObj.image" class="w-100" alt=""></div>
+        <div class="text-center mt-3">{{details.typeObj.title}}</div>
+        <div>{{details.typeObj.price + details.cost}} {{'_AED' | translate}}</div>
+      </div>
+      <div class="mt-4">
+        <div class="d-flex my-2 "><div class="pending yellow mx-1"></div><div>{{'_Created' | translate}}: {{details.createdAt | date: 'dd/MM/yyyy'}}</div> </div>
+        <div *ngIf="details.dispatchDate" class="d-flex my-2 " ><div class="pending blue mx-1"></div>{{'_Dispatched' | translate}}: {{details.dispatchDate | date: 'dd/MM/yyyy'}} </div>
+        <div *ngIf="details.deliverdDate" class="d-flex my-2 "><div class="pending green mx-1"></div>{{'_Delivered' | translate}}: {{details.deliverdDate | date: 'dd/MM/yyyy'}} </div>
+      </div>
+      <div>
+        <div class="radius-15 w-100 border-primary border py-2 px-5 my-3" *ngIf="details.status == 0"
+             [ngClass]="details.status == 0? 'bg-primary text-white' : '' ">{{'_Pending' | translate}}
+        </div>
+        <div class="radius-15 w-100 border-primary border py-2 px-5 my-3" *ngIf="details.status == 1"
+             [ngClass]="details.status == 1? 'bg-primary text-white' : '' ">{{'_Dispatched' | translate}}
+        </div>
+        <div class="radius-15 w-100 border-primary border py-2 px-5 my-3" *ngIf="details.status == 2"
+             [ngClass]="details.status == 2? 'bg-primary text-white' : '' ">{{'_OnWay' | translate}}
+        </div>
+        <div class="radius-15 w-100 border-primary border py-2 px-5 my-3" *ngIf="details.status == 3"
+             [ngClass]="details.status == 3? 'bg-primary text-white' : '' ">{{'_Completed' | translate}}
+        </div>
+        <div class="radius-15 w-100 border-primary border py-2 px-5 my-3" *ngIf="details.status == 4"
+             [ngClass]="details.status == 4? 'bg-primary text-white' : '' ">{{'_Canceled' | translate}}
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="details.status === 2" class="text-center">
+      <button class="btn btn-primary"  [routerLink]="'/tracking/' + details.tag">
+        {{'_TrackOnMap' | translate}}
+      </button>
+    </div>
+  </div>
+
+</div>

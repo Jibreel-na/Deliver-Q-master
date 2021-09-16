@@ -1,0 +1,101 @@
+@import "../../_variables.scss";
+
+.bg-shipping {
+  background-image: url("../../assets/images/bg-shipping.svg");
+}
+
+.bg-black {
+  background-image: url("../../assets/images/black-bg.jpg");
+}
+
+.bg-gray {
+  background: #c7ced8;
+}
+
+.about-bg {
+  background-image: url("../../assets/images/about-bg.jpg");
+}
+
+.card {
+  background: none !important;
+  border: none !important;
+
+  img {
+    width: 50%;
+  }
+
+}
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%
+}
+
+
+.calculator {
+  .desc {
+    height: 11.7rem;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .title {
+    top: -58px;
+
+  }
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.counter {
+  background-image: url("../../assets/images/bg-counter.jpg");
+  background-size: cover;
+  background-position: bottom;
+  p {
+    font-size: 20px;
+  }
+
+  img{
+    width: 6rem;
+  }
+}
+
+.testimeonials {
+  .comment {
+    font-size: 15px;
+    color: #afaaaa;
+  }
+
+}
+
+::ng-deep .vision {
+  .slick-dots {
+    bottom: -30px !important;
+  }
+}
+
+::ng-deep  .testimeonials {
+  .slick-dots {
+    bottom: -50px !important;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: $primary;
+  }
+}
+
+.w-10{
+  width: 10rem;
+}
+
+.partners{
+  img{
+    width:9rem;
+  }
+}

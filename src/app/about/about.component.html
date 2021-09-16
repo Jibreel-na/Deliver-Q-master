@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row bg-about">
+    <div class="col-md-12 text-center py-5">
+      <h1 class="text-white">{{'_About' | translate}} <span class="font-weight-normal">{{'_Us' | translate}}</span></h1>
+    </div>
+  </div>
+  <div class="row py-5 bg-about-info">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12 mt-3" [innerHTML]="decode(content?.content) ">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row featured py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center" *ngFor="let item of advantage">
+          <div>
+            <img [src]="appService.fileUrl + item.image" class="" alt="">
+          </div>
+          <h6 class="text-primary">{{item.title}}</h6>
+          <p>{{item.description}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

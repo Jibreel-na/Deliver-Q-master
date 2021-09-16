@@ -1,0 +1,97 @@
+@import "../../_variables.scss";
+
+.new-shipment {
+  .icon {
+    img {
+      background: black;
+      padding: 12px;
+      border-radius: 50%;
+      width: 3.8rem;
+    }
+  }
+
+  .bg-gray{
+    background: #c0c2c5;
+  }
+
+  .calculate-button:not(:disabled):hover{
+    background-color: #5f5d5d !important;
+  }
+
+  .calculate-button-div{
+    padding-top: 30px;
+  }
+
+  .proceed-button:not(:disabled){
+    background: $primary !important;
+    color: white !important;
+    }
+
+
+  .fa{
+    font-size: 20px;
+  }
+
+  .mat-expansion-panel-header-title{
+    align-items: center;
+  }
+
+  .bg-shipment{
+    background-image: url("../../assets/images/payment-type.jpg");
+  }
+
+  .active img{
+    background: $primary !important;
+
+  }
+
+  .input-group-text img {
+    width: 33px !important;
+  }
+
+  .input-group-text {
+    background-color: white;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  select {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+
+  mat-expansion-panel-header{
+    height: 85px !important;
+  }
+
+
+
+  .pac-container{
+    z-index: 9999;
+  }
+
+  .select-location{
+    bottom: -18px;
+    left: 30%;
+  }
+
+  a:hover{
+    color: $primary;
+  }
+
+  .sub-cat {
+    img {
+      width: 1.7rem;
+    }
+  }
+
+  mat-panel-title{
+    img{
+      width: 3rem;
+    }
+  }
+
+
+
+}

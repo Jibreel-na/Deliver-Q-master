@@ -1,0 +1,21 @@
+<div class="w-100 map mx-2 " fxLayout="column" fxLayoutAlign="center">
+    <div class="form-group position-relative">
+      <label>{{'_EnterAddress' | translate}}</label>
+      <input type="text" class="form-control text-left"
+             (keydown.enter)="$event.preventDefault()"
+             placeholder="{{'_SearchLocation' | translate}}" autocorrect="on"  country="AE"
+             autocapitalize="off" spellcheck="off" type="text"
+              #search>
+    </div>
+
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+      <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                  (dragEnd)="markerDragEnd($event)"></agm-marker>
+    </agm-map>
+
+
+  <div class="text-right my-3">
+    <button class="btn btn-secondary mx-1" (click)="dialog.closeAll()">{{'_Close' | translate}}</button>
+    <button class="btn btn-primary mx-1"  (click)="selectLocation()">{{'_Done' | translate}}</button>
+  </div>
+</div>

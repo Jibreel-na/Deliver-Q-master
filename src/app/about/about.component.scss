@@ -1,0 +1,19 @@
+.bg-about{
+  background-image: url("../../assets/images/bg-about.jpg");
+  background-size: cover;
+
+}
+
+.featured{
+  background-image: url("../../assets/images/bg-auth.png");
+  background-size: cover;
+
+  img{
+    width: 8rem;
+    margin-bottom: 10px;
+  }
+
+  p{
+    font-size: 14px;
+  }
+}

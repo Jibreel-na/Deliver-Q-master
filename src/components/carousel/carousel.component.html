@@ -1,0 +1,27 @@
+<div class="position-relative " dir="ltr">
+<!--  <img src="../assets/images/blur-image.jpg" alt="" class="w-100">-->
+
+  <ngx-slick-carousel class="carousel w-100"
+                      #slickModal="slick-carousel"
+                      [config]="slideConfig"
+  >
+
+    <div ngxSlickItem *ngFor="let slide of appService.banner" class="slide">
+      <img src="{{appService.fileUrl + '/' + slide.image }}" alt="" class="w-100">
+    </div>
+  </ngx-slick-carousel>
+
+  <div class="position-absolute tracking text-white">
+    <h3 class="font-weight-normal ">{{'_TrackYour' | translate}}</h3>
+    <h3 class=" font-weight-normal ">{{'_Shipments' | translate}}</h3>
+    <div class=" form radius-10 p-2">
+      <div class="">
+        <form [formGroup]="trackingForm" class="d-flex mb-5">
+          <input type="text" class="radius-10 border-white bg-white" placeholder="Ex: 56335254112525"
+                 formControlName="tag">
+          <a class="btn btn-primary mx-2 radius-10  text-white" (click)="getShipment()">{{'_TackNow' | translate}}</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
