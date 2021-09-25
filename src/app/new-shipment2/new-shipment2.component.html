@@ -1,7 +1,7 @@
 <div class="page-layout ios-scroll simple tabbedm p-16 " id="deals">
     <div id="" class="" fxLayout="row wrap">
         <div class="w-100- title">
-            <h1>Shipment Information</h1>
+            <h1>{{'_PutShippingItemInformation' | translate}}</h1>
         </div>
         <div class="w-100 mb-4 col-12" *ngIf="guest">
             <h4 class="px-2 col-12">{{'_UserInfo' | translate}}</h4>
@@ -49,10 +49,10 @@
             <div class="row" style="display:block ruby;">
                 <div class="col-6 locations">
                     <div class="w-100-p position-relative mb-32 map-input">
-                        <h1 style="color: #e65526;font-weight: bold;">Put Shipment Information</h1>
+                        <h1 style="color: #e65526;font-weight: bold;">{{'_PutShippingItemInformation' | translate}}</h1>
                         <form [formGroup]='StartAddress'>
                             <mat-form-field class="location-input">
-                                <mat-label>Enter Pickup Location</mat-label>
+                                <mat-label>{{'_PickupAddress' | translate}}</mat-label>
                                 <mat-icon matPrefix>place</mat-icon>
                                 <input type="text" id="pac-input-from" matInput (keydown.enter)="$event.preventDefault()" (focus)="fromFormFlag = true;toFormFlag = false;"
                                     autocorrect="off" country="AE" autocapitalize="off" spellcheck="off" #search>
@@ -61,7 +61,7 @@
                             <ng-container *ngIf="fromFormFlag">
                                 <div class="col-12">
                                     <mat-form-field appearance="fill">
-                                        <mat-label>City</mat-label>
+                                        <mat-label>{{'_ChooseCity' | translate}}</mat-label>
                                         <mat-select formControlName="city">
                                             <ng-container *ngFor="let city of cities">
                                                 <mat-option [value]="city._id">{{city.title}}</mat-option>
@@ -71,21 +71,21 @@
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field>
-                                        <mat-label>Flat, Floor, Building Name *</mat-label>
+                                        <mat-label>{{'_addressOFFlat' | translate}} *</mat-label>
                                         <input placeholder="Ex:101, First Floor, Park Residence" formControlName="address" type="text" matInput>
                                         <mat-error *ngIf="StartAddress.get('address').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field>
-                                        <mat-label>Landmark (Optional)</mat-label>
+                                        <mat-label>{{'_Landmark' | translate}}</mat-label>
                                         <input formControlName="landmark" type="text" matInput>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-12">
-                                    <div class="col-12">Select time and date:</div>  
+                                    <div class="col-12">{{'_SelectDateTime' | translate}}</div>  
                                     <mat-form-field>
                                         <input matInput type="datetime-local" placeholder="start date" [(ngModel)]="DatePicker" [ngModelOptions]="{standalone: true}" required>
                                     </mat-form-field>  
@@ -111,31 +111,31 @@
                                     </div> -->
                                 </div>
                                 <div class="col-12">
-                                    <div>Person to contact at the time of pickup:</div>
+                                    <div>{{'_ContactWhenPickup' | translate}}</div>
                                     <div style="padding: 1vh 1vh;">
                                         <mat-radio-group aria-label="Select an option">
-                                            <mat-radio-button value="1">Contact me</mat-radio-button>
-                                            <mat-radio-button value="2">Add contact person</mat-radio-button>
+                                            <mat-radio-button value="1">{{'_ContactMe' | translate}}</mat-radio-button>
+                                            <mat-radio-button value="2">{{'_ContactPerson' | translate}}</mat-radio-button>
                                         </mat-radio-group>
                                     </div>
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field appearance="fill" floatLabel="always">
-                                        <mat-label>Name:</mat-label>
+                                        <mat-label>{{'_Name' | translate}}:</mat-label>
                                         <input formControlName="name" type="text" matInput>
                                         <mat-error *ngIf="StartAddress.get('name').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field appearance="fill" floatLabel="always">
-                                        <mat-label>Mobile Number:</mat-label>
+                                        <mat-label>{{'_PhoneNumber' | translate}}:</mat-label>
                                         <span prefix>+971</span>
                                         <input matInput formControlName="phone" type="tel" minLength="9"
                                                maxlength="9">
                                         <mat-error *ngIf="StartAddress.get('phone').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -143,7 +143,7 @@
                         </form>
                         <form [formGroup]='endAddress'>
                             <mat-form-field class="location-input">
-                                <mat-label>Enter Drop-off Location</mat-label>
+                                <mat-label>{{'_DropOffAddress' | translate}}</mat-label>
                                 <mat-icon matPrefix>local_shipping</mat-icon>
                                 <input type="text" id="pac-input-to" matInput (focus)="fromFormFlag = false;toFormFlag = true;"
                                     autocorrect="off" country="AE" autocapitalize="off" spellcheck="off" #search2>
@@ -162,29 +162,29 @@
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field>
-                                        <mat-label>Flat, Floor, Building Name *</mat-label>
+                                        <mat-label>{{'_addressOFFlat' | translate}} *</mat-label>
                                         <input placeholder="Ex:101, First Floor, Park Residence" formControlName="address" type="text" matInput>
                                         <mat-error *ngIf="StartAddress.get('address').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field>
-                                        <mat-label>Landmark (Optional)</mat-label>
+                                        <mat-label>{{'_Landmark' | translate}}</mat-label>
                                         <input formControlName="landmark" type="text" matInput>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="col-12">Available Date and Time</div>
                                     <div class="col-12" style="padding: 12px 20px;font-weight: bolder;">{{endAddress.get('date').value}}, {{endAddress.get('time').value}}</div>
-                                </div>
+                                </div> -->
                                 <div class="col-12">
-                                    <div>Person to contact at the time of pickup:</div>
+                                    <div>{{'_ContactWhenPickup' | translate}}</div>
                                     <div style="padding: 1vh 1vh;">
                                         <mat-radio-group aria-label="Select an option">
-                                            <mat-radio-button value="1">Contact me</mat-radio-button>
-                                            <mat-radio-button value="2">Add contact person</mat-radio-button>
+                                            <mat-radio-button value="1">{{'_ContactMe' | translate}}</mat-radio-button>
+                                            <mat-radio-button value="2">{{'_ContactPerson' | translate}}</mat-radio-button>
                                         </mat-radio-group>
                                     </div>
                                 </div>
@@ -193,18 +193,18 @@
                                         <mat-label>Name:</mat-label>
                                         <input formControlName='name' type="text" matInput>
                                         <mat-error *ngIf="StartAddress.get('name').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6" style="display: inline-block;">
                                     <mat-form-field appearance="fill" floatLabel="always">
-                                        <mat-label>Mobile Number:</mat-label>
+                                        <mat-label>{{'_PhoneNumber' | translate}}:</mat-label>
                                         <span prefix>+971</span>
                                         <input matInput formControlName="phone" type="tel" minLength="9"
                                                maxlength="9">
                                         <mat-error *ngIf="StartAddress.get('phone').hasError('required')">
-                                            This Filed is required
+                                            {{'_ThisFiledIsRequired' | translate}}
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -217,7 +217,7 @@
                             </agm-map>
                         </div>
                         <form [formGroup]='calculatorForm' (click)="toFormFlag = false; fromFormFlag = false;"> 
-                            <div class="col-12">Suitable Veichle:</div>
+                            <div class="col-12">{{'_ChooseVeichle' | translate}}:</div>
                             <div class="col-12">
                                 <ng-container *ngFor="let item of categories">
                                     <div class="" style="height: 70px;" [ngClass]="f.category.value == item._id? 'v-item-selected' : 'v-item'"
@@ -235,7 +235,7 @@
                                 </ng-container>
                             </div>
                             <div class="col-12">
-                                <div class="col-12">When do you want it to be delivered:</div>
+                                <div class="col-12">{{'_WhenToDeliver' | translate}}:</div>
                                 <ng-container *ngFor="let type of types">
                                     <div style="min-width: 30%;" [ngClass]="f.type.value == type._id? 'v-item-selected' : 'v-item'"
                                      (click)="f.type.setValue(type._id);f.cost.setValue(type.price);f.typeTitle.setValue(type.title);f.duration.setValue(type.duration);">
@@ -251,35 +251,35 @@
                             <div class="col-12" style="display: inline-block;">
                                 <mat-form-field appearance="fill" floatLabel="always">
                                     <span prefix>+971</span>
-                                    <mat-label>Your Mobile Number:</mat-label>
+                                    <mat-label>Your {{'_PhoneNumber' | translate}}:</mat-label>
                                     <input matInput type="tel" minLength="9" maxlength="9" formControlName="phone">
                                 </mat-form-field>
                             </div>
                         </form>
                         <form [formGroup]="calculatorForm">
                             <div class="col-12">
-                                <h2 class="col-12" style="margin: 12px 20px;">Payment Method</h2>
+                                <h2 class="col-12" style="margin: 12px 20px;">{{'_PaymentMethod' | translate}}</h2>
                                 <div class="col-6">
-                                    <span class="col-12">Parcel/Product Method</span>
+                                    <span class="col-12">{{'_ProductPayment' | translate}}</span>
                                     <div style="padding: 1vh 1vh;">
                                         <mat-radio-group aria-label="Select an option"  formControlName="productPayment">
-                                            <mat-radio-button value="prepaid" (click)="isCOD=false;">Prepaid</mat-radio-button>
-                                            <mat-radio-button value="cod" (click)="isCOD=true;">COD</mat-radio-button>
+                                            <mat-radio-button value="prepaid" (click)="isCOD=false;">{{'_Prepaid' | translate}}</mat-radio-button>
+                                            <mat-radio-button value="cod" (click)="isCOD=true;">{{'_cod' | translate}}</mat-radio-button>
                                         </mat-radio-group>
                                         <ng-container *ngIf="isCOD">
                                             <mat-form-field> 
-                                                <mat-label>Amount</mat-label>
+                                                <mat-label>{{'_Amount' | translate}}</mat-label>
                                                 <input matInput name="amount" formControlName="productPaymentAmount">
                                             </mat-form-field>
                                         </ng-container>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <span class="col-12">Delivery Payment</span>
+                                    <span class="col-12">{{'_DeliveryPayment' | translate}}</span>
                                     <div style="padding: 1vh 1vh;">
                                         <mat-radio-group aria-label="Select an option" formControlName="deliveryPayment">
-                                            <mat-radio-button value="prepaid">Prepaid</mat-radio-button>
-                                            <mat-radio-button value="cod">COD</mat-radio-button>
+                                            <mat-radio-button value="prepaid">{{'_Prepaid' | translate}}</mat-radio-button>
+                                            <mat-radio-button value="cod">{{'_cod' | translate}}</mat-radio-button>
                                         </mat-radio-group>
                                     </div>
                                 </div>
@@ -301,33 +301,33 @@
                 </div>
                 <hr class="vertical">
                 <div class="col-6 info">
-                    <h2 style="color: #e65526;font-weight: bold;">Collected Information</h2>
+                    <h2 style="color: #e65526;font-weight: bold;">{{'_CollectedInfo' | translate}}</h2>
                     <div>
-                        <span class="ititle">Pickup Location</span>
+                        <span class="ititle">{{'_PickupAddress' | translate}}</span>
                         <span class="ivalue">{{StartAddress.get("locationText")?.value}}</span>
                         <span class="ivalue" style="display: inline-flex;" *ngIf="StartAddress.get('name')?.value != ''">{{StartAddress.get("name")?.value}} | </span>
                         <span class="ivalue" style="display: inline-flex;" *ngIf="StartAddress.get('phone')?.value != ''"> +971 {{StartAddress.get("phone")?.value}}</span>
                     </div>
                     <div>
-                        <span class="ititle">Drop-off Location</span>
+                        <span class="ititle">{{'_DropOffAddress' | translate}}</span>
                         <span class="ivalue">{{endAddress.get("locationText")?.value}}</span>
                         <span class="ivalue" style="display: inline-flex;" *ngIf="endAddress.get('name')?.value != ''">{{endAddress.get("name")?.value}} | </span>
                         <span class="ivalue" style="display: inline-flex;" *ngIf="endAddress.get('phone')?.value != ''"> +971 {{endAddress.get("phone")?.value}}</span>
                     </div>
                     <div class="col-6">
-                        <span class="ititle">Veichle Type</span>
+                        <span class="ititle">{{'_VeichleType' | translate}}</span>
                         <span class="ivalue">{{ f.categoryTitle?.value }}</span>
                     </div>
                     <div class="col-6">
-                        <span class="ititle">Delivery Type</span>
+                        <span class="ititle">{{'_DeliveryType' | translate}}</span>
                         <span class="ivalue">{{ f.typeTitle?.value }}</span>
                     </div>
                     <div>
-                        <span class="Pickup Date and Time">Pickup Date and Time</span>
+                        <span class="Pickup Date and Time">{{'_PickupDateTime' | translate}}</span>
                         <span class="ivalue">{{StartAddress.get("date")?.value}}, {{StartAddress.get("time")?.value}}</span>
                     </div>
                     <div>
-                        <span class="ititle">Drop-off Date and Time Location</span>
+                        <span class="ititle">{{'_DropoffDateTime' | translate}}</span>
                         <span class="ivalue">{{endAddress.get("date")?.value}}, {{endAddress.get("time")?.value}}</span>
                     </div>
                     <!-- <div class="col-12" style="display: inline-flex;">
@@ -336,7 +336,7 @@
                     </div> -->
                     <hr>
                     <div class="col-12" style="display: inline-flex;">
-                        <span class="ivalue col-6" style="flex: left;">Amount</span>
+                        <span class="ivalue col-6" style="flex: left;">{{'_Amount' | translate}}</span>
                         <span class="ivalue col-6" style="flex: right;float: right;text-align: right;">{{f.cost?.value}}</span>
                     </div>
                     <div class="col-12">
@@ -347,7 +347,7 @@
                             </ng-container>
                         
                             <ng-container matColumnDef="title_ar" class="">
-                                <th *matHeaderCellDef mat-header-cell mat-sort-header> Title</th>
+                                <th *matHeaderCellDef mat-header-cell mat-sort-header> الاسم</th>
                                 <td *matCellDef="let element" mat-cell> {{element.title_ar}}  </td>
                             </ng-container>
                         

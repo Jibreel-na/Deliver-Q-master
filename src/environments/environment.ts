@@ -1,9 +1,9 @@
 export const environment = {
   production: false,
-  apiURI: 'http://localhost:8080/v1',
-  appUrl: 'http://localhost:8080/v1',
-  baseUrl: 'http://localhost:8080/v1',
-  fileUrl: 'http://localhost:8080/uploads/original/',
+  apiURI: 'https://server-deliverq.com/v1',
+  appUrl: 'https://server-deliverq.com/v1',
+  baseUrl: 'https://server-deliverq.com/v1',
+  fileUrl: 'https://server-deliverq.com/uploads/original/',
   firebaseConfig: {
     apiKey: "AIzaSyC9O5XnDgopFaMONPpTV8Vnt7MCmp6ZP40",
     authDomain: "deliveryq-8ccda.firebaseapp.com",

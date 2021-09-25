@@ -39,7 +39,7 @@ export class NewShipment2Component implements OnInit {
   cities: CityModel[] = [];
   guest = false;
   categories: CategoryModel[] = [];
-  displayedColumns: string[] = [ 'title' , 'duration', 'price'];
+  displayedColumns: string[] = [ 'title' , 'title_ar', 'duration', 'price'];
   typesDataSource: any;
   types: TypeModel[] = [];
   times: any[] = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30",

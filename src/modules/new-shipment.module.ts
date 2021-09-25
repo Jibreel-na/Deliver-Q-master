@@ -17,7 +17,7 @@ import {VerificationGuestComponent} from "../app/dialog/verification-guest/verif
 
 const routes: Routes = [
   {
-    path: 'new-shipment', component: NewShipmentComponent,
+    path: 'new-shipment2', component: NewShipmentComponent,
   }
 ];
 
