@@ -370,6 +370,9 @@ export class NewShipment2Component implements OnInit {
       }
     });
   }
+    updateIsCOD(){
+        this.isCOD = this.f.productPayment.value == 'cod' ? true : false;
+    }
 
    async ngOnInit() {
     this.appService.isUserLoggedIn.subscribe(value => {

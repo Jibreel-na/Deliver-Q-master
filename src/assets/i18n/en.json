@@ -95,6 +95,7 @@
   "_Apartment": "Apartment",
   "_PickupDateTime": "Pickup Date and Time",
   "_DropoffDateTime": "Drop-off Date and Time",
+  "_TotalWeight": "Total Weight",
   "_House": "House",
   "_Office": "Office",
   "_PhoneNumber": "Phone Number",

@@ -30,6 +30,7 @@
   "_DeliveryType": "نوع التوصيل",
   "_PickupDateTime": "وقت وتاريخ الاستلام",
   "_DropoffDateTime": "وقت وتاريخ التوصيل",
+  "_TotalWeight": "الوزن",
   "_Prepaid": "دفع مسبق",
   "_cod": "دفع عند الاستلام",
   "_Amount": "المبلغ",
